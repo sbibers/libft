@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salam <salam@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mabuyahy <mabuyahy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 10:37:53 by sbibers           #+#    #+#             */
-/*   Updated: 2024/11/29 22:17:20 by salam            ###   ########.fr       */
+/*   Updated: 2025/02/10 18:35:48 by mabuyahy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char	*ft_read_save(int fd, char *save)
 			return (NULL);
 		}
 		buffer[byte_read] = '\0';
-		save = ft_strjoin(save, buffer);
+		save = ft_strjoin_gnl(save, buffer);
 	}
 	free(buffer);
 	return (save);
