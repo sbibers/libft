@@ -3,18 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbibers <sbibers@student.42.fr>            +#+  +:+       +#+        */
+/*   By: salam <salam@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 17:04:32 by sbibers           #+#    #+#             */
-/*   Updated: 2024/09/01 11:43:53 by sbibers          ###   ########.fr       */
+/*   Updated: 2024/11/29 22:25:28 by salam            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
+# include <fcntl.h>
+# include <stdarg.h>
 # include <stddef.h>
+# include <stdio.h>
 # include <stdlib.h>
+# include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 size_t				ft_strlen(const char *str);
 void				ft_bzero(void *s, size_t n);
@@ -41,7 +49,7 @@ char				*ft_strnstr(const char *big, const char *little,
 char				*ft_strdup(const char *s);
 void				*ft_calloc(size_t nmemb, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
-char				*ft_strjoin(char const *s1, char const *s2);
+char				*ft_strjoin(char *s1, char *s2);
 char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_itoa(int n);
@@ -66,5 +74,23 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+// get_next_line
+char				*get_next_line(int fd);
+char				*f_strchr(char *str, int c);
+
+// printf
+int					ft_printf(const char *str, ...);
+int					ft_prt_c(char c);
+int					ft_dec_len(long int n);
+void				ft_putnbr(int n);
+int					ft_prt_id(int n);
+int					ft_print_hex(char *str);
+char				ft_decimal_to_hex(char digit, char t);
+int					ft_hex_len(unsigned long add);
+int					ft_prt_ptr(unsigned long add);
+int					ft_prt_s(char *str);
+int					ft_prt_x(unsigned int n, char c);
+int					ft_unsigned(unsigned int n);
 
 #endif
