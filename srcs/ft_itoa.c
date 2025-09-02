@@ -6,26 +6,17 @@
 /*   By: sbibers <sbibers@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 19:51:54 by sbibers           #+#    #+#             */
-/*   Updated: 2024/09/01 09:34:44 by sbibers          ###   ########.fr       */
+/*   Updated: 2025/09/02 17:14:28 by sbibers          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-static size_t	ft_intlen(int n)
+size_t	num_len(int n)
 {
 	size_t	len;
 
-	len = 0;
-	if (n <= 0)
-	{
-		len++;
-		if (n == 0)
-			return (len);
-		n = -n;
-	}
+	len = (n < 0);
 	while (n)
 	{
 		len++;
@@ -34,67 +25,37 @@ static size_t	ft_intlen(int n)
 	return (len);
 }
 
-static char	*ft_is_special(void)
+char	*fill_string(int n, int len)
 {
 	char	*str;
 
-	str = (char *)malloc(12 * sizeof(char));
+	str = malloc(len + 1);
 	if (!str)
 		return (NULL);
-	str[0] = '-';
-	str[1] = '2';
-	str[2] = '1';
-	str[3] = '4';
-	str[4] = '7';
-	str[5] = '4';
-	str[6] = '8';
-	str[7] = '3';
-	str[8] = '6';
-	str[9] = '4';
-	str[10] = '8';
-	str[11] = '\0';
-	return (str);
-}
-
-static void	ft_stritoa(char *str, int n, size_t len)
-{
-	size_t	i;
-
-	i = len - 1;
 	str[len] = '\0';
 	if (n < 0)
 	{
-		n = -n;
 		str[0] = '-';
+		n = -n;
 	}
+	len--;
 	while (n)
 	{
-		str[i] = n % 10 + 48;
+		str[len] = n % 10 + 48;
+		len--;
 		n /= 10;
-		i--;
 	}
+	return (str);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	size_t	len;
+	size_t		len;
 
 	if (n == 0)
-	{
-		str = (char *)malloc(2 * sizeof(char));
-		if (!str)
-			return (NULL);
-		str[0] = '0';
-		str[1] = '\0';
-		return (str);
-	}
-	if (n == -2147483648)
-		return (ft_is_special());
-	len = ft_intlen(n);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	ft_stritoa(str, n, len);
-	return (str);
+		return (ft_strdup("0"));
+	else if (n == INT_MIN)
+		return (ft_strdup("-2147483648"));
+	len = num_len(n);
+	return (fill_string(n, len));
 }
